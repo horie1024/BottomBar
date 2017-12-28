@@ -186,7 +186,7 @@ uploadArchives {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
             pom.version = '2.3.2'
-            pom.groupId = 'com.roughike.bottom-bar'
+            pom.groupId = 'com.roughike'
             pom.artifactId = 'bottom-bar'
         }
     }
