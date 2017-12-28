@@ -92,15 +92,15 @@ public class BottomBarTab extends LinearLayout {
     void prepareLayout() {
         inflate(getContext(), getLayoutResource(), this);
         setOrientation(VERTICAL);
-        setGravity(isTitleless? Gravity.CENTER : Gravity.CENTER_HORIZONTAL);
+        setGravity(isTitleless ? Gravity.CENTER : Gravity.CENTER_HORIZONTAL);
         setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         setBackgroundResource(MiscUtils.getDrawableRes(getContext(), R.attr.selectableItemBackgroundBorderless));
 
-        iconView = (AppCompatImageView) findViewById(R.id.bb_bottom_bar_icon);
+        iconView = findViewById(R.id.bb_bottom_bar_icon);
         iconView.setImageResource(iconResId);
 
         if (type != Type.TABLET && !isTitleless) {
-            titleView = (TextView) findViewById(R.id.bb_bottom_bar_title);
+            titleView = findViewById(R.id.bb_bottom_bar_title);
             titleView.setVisibility(VISIBLE);
 
             if (type == Type.SHIFTING) {
@@ -314,6 +314,19 @@ public class BottomBarTab extends LinearLayout {
         }
 
         return 0;
+    }
+
+    public void showBadgeWithNoCount() {
+        if (badge == null) {
+            badge = new BottomBarBadge(getContext());
+            badge.attachToTab(this, badgeBackgroundColor);
+        }
+
+        badge.setCount();
+
+        if (isActive && badgeHidesWhenActive) {
+            badge.hide();
+        }
     }
 
     public void setBadgeCount(int count) {

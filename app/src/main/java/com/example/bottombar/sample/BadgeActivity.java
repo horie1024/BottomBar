@@ -23,9 +23,9 @@ public class BadgeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_three_tabs);
 
-        messageView = (TextView) findViewById(R.id.messageView);
+        messageView = findViewById(R.id.messageView);
 
-        final BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        final BottomBar bottomBar = findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -41,6 +41,9 @@ public class BadgeActivity extends AppCompatActivity {
         });
 
         BottomBarTab nearby = bottomBar.getTabWithId(R.id.tab_nearby);
-        nearby.setBadgeCount(5);
+        nearby.showBadgeWithNoCount();
+
+        BottomBarTab friends = bottomBar.getTabWithId(R.id.tab_friends);
+        friends.setBadgeCount(3);
     }
 }

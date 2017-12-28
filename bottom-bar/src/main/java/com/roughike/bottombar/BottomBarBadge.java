@@ -4,14 +4,11 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.TextView;
 
 /*
  * BottomBar library for Android
@@ -29,7 +26,7 @@ import android.widget.TextView;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class BottomBarBadge extends TextView {
+class BottomBarBadge extends android.support.v7.widget.AppCompatTextView {
     private int count;
     private boolean isVisible = false;
 
@@ -45,6 +42,11 @@ class BottomBarBadge extends TextView {
     void setCount(int count) {
         this.count = count;
         setText(String.valueOf(count));
+    }
+
+    void setCount() {
+        this.count = -1;
+        setText("");
     }
 
     /**
@@ -149,8 +151,14 @@ class BottomBarBadge extends TextView {
         int size = Math.max(getWidth(), getHeight());
         float xOffset = (float) (iconView.getWidth() / 1.25);
 
+        if (tab.badge.count == -1) {
+            size = (int) (size * 0.5);
+            setTranslationY(20);
+        } else {
+            setTranslationY(10);
+        }
+
         setX(iconView.getX() + xOffset);
-        setTranslationY(10);
 
         if (params.width != size || params.height != size) {
             params.width = size;
