@@ -145,6 +145,8 @@ class BottomBarBadge extends android.support.v7.widget.AppCompatTextView {
     }
 
     void adjustPositionAndSize(BottomBarTab tab) {
+        if (tab.badge == null) return;
+
         AppCompatImageView iconView = tab.getIconView();
         ViewGroup.LayoutParams params = getLayoutParams();
 
